@@ -69,6 +69,18 @@ class DataparserOutputs:
     dataparser_scale: float = 1.0
     """Scale applied by the dataparser."""
 
+    depths: Optional[torch.Tensor] = None
+    """Monocular depth."""
+    normals: Optional[torch.Tensor] = None
+    """Monocular normal."""
+    additional_inputs: Dict[str, Any] = to_immutable_dict({})
+    """Dictionary of additional dataset information (e.g. semantics/point clouds/masks).
+    {input_name:
+    ... {"func": function to process additional dataparser outputs,
+    ... "kwargs": dictionary of data to pass into "func"}
+    }
+    """
+
     def as_dict(self) -> dict:
         """Returns the dataclass as a dictionary."""
         return vars(self)
